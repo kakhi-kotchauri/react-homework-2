@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useEffect } from "react"
 
 export function Counter(props) {
-    const [start, setstart] = useState(props.startvalue || 0)
+    const start = props.startvalue || 0
     const [inputvalue, setinputvalue] = useState('')
     const [number, setnumber] = useState(start)
     
@@ -29,10 +29,11 @@ export function Counter(props) {
         }
     }
 
-    function valueset() {
+    function valueset(e) {
+        e.preventDefault()
         if(inputvalue) {
             if(inputvalue >= 0) {
-               setstart(parseInt(inputvalue))
+               setnumber(parseInt(inputvalue))           
             }
         }
     }
@@ -45,7 +46,7 @@ export function Counter(props) {
         <h1 className="title">Counter</h1>
         <h2 className="step">{`step = ${props.step || 5}`}</h2>
         
-     <div className="inputpar">
+     <form className="inputpar">
 
         <input 
         value={inputvalue}
@@ -55,9 +56,9 @@ export function Counter(props) {
         placeholder="start value"
         />
 
-        <button onClick={() => valueset()} className="buttons">set</button>
+        <button onClick={(e) => valueset(e)} className="buttons">set</button>
 
-    </div>
+    </form>
 
      <div className="buttonpar">
 
